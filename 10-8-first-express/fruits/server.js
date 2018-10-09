@@ -12,6 +12,7 @@ const express = require('express');
 const app   = express();
 const bodyParser = require('body-parser');
 
+const methodOverride = require('method-override');
 
 // We are requiring our model
 const Fruits = require('./models/fruits');
@@ -21,8 +22,11 @@ const Fruits = require('./models/fruits');
 app.use(bodyParser.urlencoded({extended: false}));
 
 
+app.use(methodOverride('_method'));
+
+
 app.get('/', (req, res) => {
-  res.send('This server is responding to the request');
+  res.send('This is fruit app');
 });
 
 
@@ -36,7 +40,7 @@ app.get('/', (req, res) => {
 
 // Index route -shows all the fruits
 app.get('/fruits', (req, res) => {
-  res.send(Fruits);
+  res.render('index.ejs', {fruits: Fruits});
 });
 
 
@@ -62,6 +66,13 @@ Fruits.push(req.body);
 });
 
 
+app.get('/fruits/:index/edit', (req, res) => {
+  res.render('edit.ejs', {
+    fruit: Fruits[req.params.index],
+    index: req.params.index
+  });
+});
+
 
 // url params, is extra stuff we can put in our URL for our server to dynamically read.
 // url params - is a variable that we can capture in the URL
@@ -74,6 +85,34 @@ app.get('/fruits/:index', (req, res) => {
     fruit: Fruits[req.params.index]
   });
 });
+
+
+// delete method --> https://www.npmjs.com/package/method-override
+app.delete('/fruits/:index', (req, res) => {
+  console.log(req.params.index, ' index in delete route');
+  Fruits.splice(req.params.index, 1);
+  res.redirect('/fruits')
+});
+
+
+// edit a product in the form
+app.put('/fruits/:index', (req, res) => {
+  console.log(req.params.index, ' id in the route');
+  console.log(req.body, ' this should be our form data');
+
+  if (req.body.readyToEat === 'on'){
+    req.body.readyToEat = true;
+  } else {
+    req.body.readyToEat = false;
+  }
+  Fruits[req.params.index] = req.body;
+
+  res.redirect('/fruits');
+});
+
+
+
+
 
 
 // keep the port between 3000 and 9000 (no less, no more)
