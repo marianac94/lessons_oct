@@ -22,6 +22,10 @@ app.get('/tip/:total/:tipPercentage', (req, res) => {
 })
 
 
+// Create a route of '/magic' that should expect a phrase in the URL that ask the Magic 8 ball a question. So if the user hits that route and asks a question of "Will I be a Millionaire" (ex. '/magic/Will%20I%20Be%20A%20Millionaire') they should see returned to them their question AND a random Magic 8 ball response (see the array below) on the screen.
+
+
+
 app.listen(3000, (req, res) => {
   console.log('Server is working just fine');
 });
