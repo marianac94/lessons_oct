@@ -10,10 +10,15 @@
 // Then app.get for the server to listen the request and send to the client
 const express = require('express');
 const app   = express();
+const bodyParser = require('body-parser');
 
 
 // We are requiring our model
 const Fruits = require('./models/fruits');
+
+
+// setting up middleWare - is the functions that happen sychronously in the request from the client on the server
+app.use(bodyParser.urlencoded({extended: false}));
 
 
 app.get('/', (req, res) => {
@@ -35,6 +40,29 @@ app.get('/fruits', (req, res) => {
 });
 
 
+// making a new page route (new.ejs) it has to be above index otherwise its not going to read it (the file)
+app.get('/fruits/new', (req, res) => {
+  res.render('new.ejs');
+});
+
+
+// whenever used the req.body you need to install (npm install body-parser) in the terminal for the function to work
+app.post('/fruits', (req, res) => {
+  console.log(req.body, ' this is where our info from the fruit live');
+
+// redirect the information that uploads to the array of fruits
+if (req.body.readyToEat === 'on'){
+  req.body.readyToEat = true;
+} else {
+  req.body.readyToEat = false;
+}
+
+Fruits.push(req.body);
+  res.redirect('/fruits');
+});
+
+
+
 // url params, is extra stuff we can put in our URL for our server to dynamically read.
 // url params - is a variable that we can capture in the URL
 app.get('/fruits/:index', (req, res) => {
@@ -51,4 +79,4 @@ app.get('/fruits/:index', (req, res) => {
 // keep the port between 3000 and 9000 (no less, no more)
 app.listen(3000, () => {
   console.log('Server is listening, on port 3000');
-})
+});
