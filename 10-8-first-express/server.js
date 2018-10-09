@@ -28,7 +28,7 @@ app.get('/', (request, response) => { //<- (req, res) in short
 
 
 
-// keep the port between 3000 and 9000
+// keep the port between 3000 and 9000 (no less, no more)
 app.listen(3000, () => {
   console.log('server is listening, on port 3000');
 })
