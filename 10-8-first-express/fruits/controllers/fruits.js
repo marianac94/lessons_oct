@@ -74,7 +74,7 @@ router.put('/:index', (req, res) => {
   }
   Fruits[req.params.index] = req.body;
 
-  res.redirect('/');
+  res.redirect('/fruits');
 });
 
 

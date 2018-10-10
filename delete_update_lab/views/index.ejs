@@ -16,13 +16,16 @@
           Email: <%=classroom[i].email%>
         </h4>
 
-        <form action="/people/<%= i %>?_method=DELETE" method="POST">
+        <form action="/people/<%=i%>?_method=DELETE" method="POST">
           <input type="submit" value="delete">
         </form>
+
+        <a href="/people/<%=i%>/edit">Edit</a>
 
       </li>
     <% } %>
 
+      <a href="/people/new">Add new students to list!</a>
     </ul>
 
   </body>
