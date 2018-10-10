@@ -19,12 +19,13 @@
       <% } else { %>
       It is not ready to eat
       <% } %>
-
-// delete method
-      <form action="/fruits <% i%>?_method=DELETE" method="POST">
-          <input type="submit" value="delete">
-      </form>
-      <% }%>
+      <!--  ADD DELETE FORM HERE-->
+      <form action="/fruits/<%=i%>?_method=DELETE" method="POST">
+        <input type="submit" value="delete">
+                  </form>
+        <a href="/fruits/<%=i%>/edit">Edit <%=fruits[i].name%></a>
+    </li>
+    <% } %>
   </ul>
   <nav>
     <a href="/fruits/new">Create a New Fruit</a>

@@ -14,16 +14,19 @@ const bodyParser = require('body-parser');
 
 const methodOverride = require('method-override');
 
-// We are requiring our model
-const Fruits = require('./models/fruits');
+// Require our Controller
+const fruitsController = require('./controllers/fruits');
+
+// // We are requiring our model
+// const Fruits = require('./models/fruits');
 
 
 // setting up middleWare - is the functions that happen sychronously in the request from the client on the server
 app.use(bodyParser.urlencoded({extended: false}));
-
-
 app.use(methodOverride('_method'));
 
+//  /fruits sets up every route in the fruitsController aka the whole router object we exproting to the route /fruits
+app.use('/fruits', fruitsController);
 
 app.get('/', (req, res) => {
   res.send('This is fruit app');
@@ -38,80 +41,77 @@ app.get('/', (req, res) => {
 // Controller is a way to organize modularize out code, the glue between the model and the view it will look like our roots
 
 
-// Index route -shows all the fruits
-app.get('/fruits', (req, res) => {
-  res.render('index.ejs', {fruits: Fruits});
-});
-
-
-// making a new page route (new.ejs) it has to be above index otherwise its not going to read it (the file)
-app.get('/fruits/new', (req, res) => {
-  res.render('new.ejs');
-});
-
-
-// whenever used the req.body you need to install (npm install body-parser) in the terminal for the function to work
-app.post('/fruits', (req, res) => {
-  console.log(req.body, ' this is where our info from the fruit live');
-
-// redirect the information that uploads to the array of fruits
-if (req.body.readyToEat === 'on'){
-  req.body.readyToEat = true;
-} else {
-  req.body.readyToEat = false;
-}
-
-Fruits.push(req.body);
-  res.redirect('/fruits');
-});
-
-
-app.get('/fruits/:index/edit', (req, res) => {
-  res.render('edit.ejs', {
-    fruit: Fruits[req.params.index],
-    index: req.params.index
-  });
-});
-
-
-// url params, is extra stuff we can put in our URL for our server to dynamically read.
-// url params - is a variable that we can capture in the URL
-app.get('/fruits/:index', (req, res) => {
-  console.log(req.params);
-
-
-// The property name becomes a variable within the ejs page
-  res.render('show.ejs', {
-    fruit: Fruits[req.params.index]
-  });
-});
-
-
-// delete method --> https://www.npmjs.com/package/method-override
-app.delete('/fruits/:index', (req, res) => {
-  console.log(req.params.index, ' index in delete route');
-  Fruits.splice(req.params.index, 1);
-  res.redirect('/fruits')
-});
-
-
-// edit a product in the form
-app.put('/fruits/:index', (req, res) => {
-  console.log(req.params.index, ' id in the route');
-  console.log(req.body, ' this should be our form data');
-
-  if (req.body.readyToEat === 'on'){
-    req.body.readyToEat = true;
-  } else {
-    req.body.readyToEat = false;
-  }
-  Fruits[req.params.index] = req.body;
-
-  res.redirect('/fruits');
-});
-
-
-
+// // Index route -shows all the fruits
+// app.get('/fruits', (req, res) => {
+//   res.render('index.ejs', {fruits: Fruits});
+// });
+//
+//
+// // making a new page route (new.ejs) it has to be above index otherwise its not going to read it (the file)
+// app.get('/fruits/new', (req, res) => {
+//   res.render('new.ejs');
+// });
+//
+//
+// // whenever used the req.body you need to install (npm install body-parser) in the terminal for the function to work
+// app.post('/fruits', (req, res) => {
+//   console.log(req.body, ' this is where our info from the fruit live');
+//
+// // redirect the information that uploads to the array of fruits
+// if (req.body.readyToEat === 'on'){
+//   req.body.readyToEat = true;
+// } else {
+//   req.body.readyToEat = false;
+// }
+//
+// Fruits.push(req.body);
+//   res.redirect('/fruits');
+// });
+//
+//
+// app.get('/fruits/:index/edit', (req, res) => {
+//   res.render('edit.ejs', {
+//     fruit: Fruits[req.params.index],
+//     index: req.params.index
+//   });
+// });
+//
+//
+// // url params, is extra stuff we can put in our URL for our server to dynamically read.
+// // url params - is a variable that we can capture in the URL
+// app.get('/fruits/:index', (req, res) => {
+//   console.log(req.params);
+//
+//
+// // The property name becomes a variable within the ejs page
+//   res.render('show.ejs', {
+//     fruit: Fruits[req.params.index]
+//   });
+// });
+//
+//
+// // delete method --> https://www.npmjs.com/package/method-override
+// app.delete('/fruits/:index', (req, res) => {
+//   console.log(req.params.index, ' index in delete route');
+//   Fruits.splice(req.params.index, 1);
+//   res.redirect('/fruits')
+// });
+//
+//
+// // edit a product in the form
+// app.put('/fruits/:index', (req, res) => {
+//   console.log(req.params.index, ' id in the route');
+//   console.log(req.body, ' this should be our form data');
+//
+//   if (req.body.readyToEat === 'on'){
+//     req.body.readyToEat = true;
+//   } else {
+//     req.body.readyToEat = false;
+//   }
+//   Fruits[req.params.index] = req.body;
+//
+//   res.redirect('/fruits');
+// });
 
 
 

@@ -8,28 +8,20 @@
 </head>
 
 <body>
-
   <h1>Edit Fruit Page</h1>
-
   <form method="POST" action="/fruits/<%=id%>?_method=PUT">
     <!--  NOTE: the form is pre-populated with values for the server-->
     Name: <input type="text" name="name" value="<%=fruit.name%>"/><br/>
-
-    Color: <input type="text" name="color" value="<%=fruit.color%>"/><br/>
-
-    Is Ready To Eat:
+            Color: <input type="text" name="color" value="<%=fruit.color%>"/><br/>
+            Is Ready To Eat:
     <input type="checkbox" name="readyToEat"
-
-    <% if(fruit.readyToEat === true){ %>
-            checked
+                <% if(fruit.readyToEat === true){ %>
+              checked
     <% } %>
     />
-
     <br/>
-
     <input type="submit" name="" value="Submit Changes"/>
-
-    </form>
+        </form>
 </body>
 
 </html>
