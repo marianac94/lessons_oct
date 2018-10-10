@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Classroom list</h1>
+
+    <ul>
+      <% for(let i = 0; i < classroom.length; i++) { %>
+      <li>
+        <h4>
+          Name: <%=classroom[i].name%> <br/>
+          Age: <%=classroom[i].age%> <br/>
+          Email: <%=classroom[i].email%>
+        </h4>
+      </li>
+    <% } %>
+    </ul>
+
+  </body>
+</html>

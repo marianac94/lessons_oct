@@ -7,37 +7,37 @@ const people = [
   {
     name: 'Alex',
     age: 29,
-    email: 'mariana@gmail.com'
+    email: 'alex@gmail.com'
   },
   {
     name: 'Jawad',
     age: 23,
-    email: 'mariana@gmail.com'
+    email: 'jawad@gmail.com'
   },
   {
     name: 'Mirza',
     age: 24,
-    email: 'mariana@gmail.com'
+    email: 'mirza@gmail.com'
   },
   {
     name: 'Christine',
     age: 25,
-    email: 'mariana@gmail.com'
+    email: 'christine@gmail.com'
   },
   {
     name: 'Julian',
     age: 26,
-    email: 'mariana@gmail.com'
+    email: 'julian@gmail.com'
   },
   {
     name: 'Stephan',
     age: 31,
-    email: 'mariana@gmail.com'
+    email: 'stephan@gmail.com'
   },
   {
     name: 'Sha',
     age: 30,
-    email: 'mariana@gmail.com'
+    email: 'sha@gmail.com'
   }
 ];
 
