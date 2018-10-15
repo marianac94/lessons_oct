@@ -2,10 +2,13 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  console.log('page works just fine!');
-})
+  res.render('index.ejs');
+});
 
 
-app.listen(3000, (req, res) => {
+
+
+
+app.listen(3000, () => {
   console.log('server is listening!');
 })
