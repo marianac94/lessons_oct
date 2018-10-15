@@ -13,5 +13,14 @@
         <li><a href="/authors/new">Create a new Author</a></li>
       </ul>
     </nav>
+    <main>
+      <ul>
+        <%for(let i = 0; i < authors.length; i++) {%>
+          <li>
+            <a href="/authors/<%=authors[i].id%>"><%=authors[i].name%></a>
+          </li>
+      <% } %>
+      </ul>
+    </main>
   </body>
 </html>
