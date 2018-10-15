@@ -5,7 +5,7 @@
     <title></title>
   </head>
   <body>
-    <h1>Authros</h1>
+    <h1>Authors</h1>
 
     <nav>
       <ul>
@@ -15,9 +15,9 @@
     </nav>
     <main>
       <ul>
-        <%for(let i = 0; i < authors.length; i++) {%>
+        <% for(let i = 0; i < authors.length; i++){ %>
           <li>
-            <a href="/authors/<%=authors[i].id%>"><%=authors[i].name%></a>
+          <a href="/authors/<%=authors[i].id%>"><%=authors[i].name %></a>
           </li>
       <% } %>
       </ul>
