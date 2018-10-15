@@ -9,6 +9,24 @@ router.get('/', (req, res) => {
 
 router.get('/new', (req, res) => {
   res.render('authors/new.ejs')
-})
+});
+
+router.post('/', (req, res) => {
+  Author.create(req.body, (err, createdAuthor) => {
+
+    if(err) {
+      console.log(err);
+    } else {
+      res.redirect('/authors');
+    }
+  });
+});
+
+
+
+
+
+
+
 
 module.exports = router;
