@@ -5,7 +5,7 @@
 // atom .
 // Change the "main" to "server.js" instead of "index.js"
 // At the end click: node server.js (for the server to run) "http://localhost:3000/"
-// Then create variable that require the express module (as in line 8)
+// Then create variable that require the express module (as in line 11)
 // Run in server to see it works (line 27)
 // Then app.get for the server to listen the request and send to the client
 const express = require('express');
@@ -13,6 +13,9 @@ const app   = express();
 const bodyParser = require('body-parser');
 
 const methodOverride = require('method-override');
+
+// require our database
+require('./db/db');
 
 // Require our Controller
 const fruitsController = require('./controllers/fruits');

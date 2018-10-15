@@ -5,9 +5,21 @@ const router = express.Router();
 const Fruits = require('../module/fruits');
 
 
-// Index route -shows all the fruits
+// Index route
+// Shows all the fruits
 router.get('/', (req, res) => {
-  res.render('index.ejs', {fruits: Fruits});
+
+  Fruits.find({}, (err, allFruits) => {
+    if(err){
+      console.log(err);
+    } else {
+      console.log(allFruits)
+      // allFruits, is still an array
+      res.render('index.ejs', {
+        fruits: allFruits
+      });
+    }
+  });
 });
 
 
@@ -17,64 +29,72 @@ router.get('/new', (req, res) => {
 });
 
 
-// whenever used the req.body you need to install (npm install body-parser) in the terminal for the function to work
+// Post new fruits (create)
 router.post('/', (req, res) => {
-  console.log(req.body, ' this is where our info from the fruit live');
+  console.log(req.body, ' this is where our info from the fruit form will live');
 
-// redirect the information that uploads to the array of fruits
-if (req.body.readyToEat === 'on'){
-  req.body.readyToEat = true;
-} else {
-  req.body.readyToEat = false;
-}
-
-Fruits.push(req.body);
-  res.redirect('/');
-});
-
-
-router.get('/:index/edit', (req, res) => {
-  res.render('edit.ejs', {
-    fruit: Fruits[req.params.index],
-    index: req.params.index
-  });
-});
-
-
-// url params, is extra stuff we can put in our URL for our server to dynamically read.
-// url params - is a variable that we can capture in the URL
-router.get('/:index', (req, res) => {
-  console.log(req.params);
-
-
-// The property name becomes a variable within the ejs page
-  res.render('show.ejs', {
-    fruit: Fruits[req.params.index]
-  });
-});
-
-
-// delete method --> https://www.npmjs.com/package/method-override
-router.delete('/:index', (req, res) => {
-  console.log(req.params.index, ' index in delete route');
-  Fruits.splice(req.params.index, 1);
-  res.redirect('/fruits')
-});
-
-
-// edit a product in the form
-router.put('/:index', (req, res) => {
-  console.log(req.params.index, ' id in the route');
-  console.log(req.body, ' this should be our form data');
-
-  if (req.body.readyToEat === 'on'){
+  if(req.body.readyToEat === 'on'){
     req.body.readyToEat = true;
   } else {
     req.body.readyToEat = false;
   }
-  Fruits[req.params.index] = req.body;
+  // Rewrite this code to use mongodb
+  Fruits.create(req.body, (err, createdFruit) => {
+    if(err){
+      console.log(err)
+    } else {
+      console.log(createdFruit);
+      res.redirect('/fruits')
+    }
+  });
+});
 
-  res.redirect('/fruits');
+
+// edit a product in the form (first part)
+router.get('/:id/edit', (req, res) => {
+  Fruits.findById(req.params.id, (err, foundFruit) => {
+      res.render('edit.ejs', {
+        fruit: foundFruit,
+      });
+  });
+});
+
+
+// This shows just 1 fruit when you click
+router.get('/:id', (req, res) => {
+  console.log(req.params);
+
+  Fruits.findById(req.params.id, (err, foundFruit) => {
+    console.log(foundFruit, 'found Fruit')
+  res.render('show.ejs', {
+    fruit: foundFruit
+  });
+});
+});
+
+
+// delete method
+router.delete('/:id', (req, res) => {
+  console.log(req.params.id, ' index in delete route');
+  Fruits.findByIdAndRemove(req.params.id, (err, deleteFruits) => {
+    res.redirect('/fruits')
+  });
+});
+
+
+// edit a product in the form (second part)
+router.put('/:id', (req, res) => {
+  console.log(req.params.id, ' id in the put route');
+  console.log(req.body, ' this should be our form data');
+  if(req.body.readyToEat === 'on'){
+    req.body.readyToEat = true;
+  } else {
+    req.body.readyToEat = false;
+  }
+
+  Fruits.findByIdAndUpdate(req.params.id, req.body, (err, updatedModel) => {
+    res.redirect('/fruits')
+  });
 });
 
 
