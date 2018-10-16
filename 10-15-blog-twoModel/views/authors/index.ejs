@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Authors</h1>
+
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/authors/new">Create a new Author</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <ul>
+        <% for(let i = 0; i < authors.length; i++){ %>
+          <li>
+          <a href="/authors/<%= authors[i].id %>"> <%=authors[i].name %> </a>
+          </li>
+          
+      <% } %>
+      </ul>
+    </main>
+
+  </body>
+</html>

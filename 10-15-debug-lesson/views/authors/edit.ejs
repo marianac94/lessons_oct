@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <header>
+    <h1>Edit <%=author.name%></h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/authors">Authors Index</a></li>
+      </ul>
+    </nav>
+  </header><!-- /header -->
+  <main>
+    <h2>Author Attributes:</h2>
+    <form action="/authors/<%=author.id%>?_method=PUT" method="POST">
+      <input type="text" name="name" value="<%=author.name%>">
+      <button type="submit">Update Author</button>
+    </form>
+  </main>
+</body>
+</html>
