@@ -3,7 +3,13 @@ const router = express.Router();
 
 const Pets = require('../models/pets');
 
-router.get('/:i')
+router.get('/:id', () => {
+  Pets.find({}, (err, foundPets) => {
+    res.render('pets/index.ejs', {
+      pets: foundPets
+    })
+  })
+})
 
 
 

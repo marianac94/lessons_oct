@@ -1,37 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <header>
     <h1>Show page for <%= author.name %></h1>
-
     <nav>
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/authors">Authors Index</a></li>
+        <li><a href="/authors">Author Index</a></li>
         <li><a href="/authors/<%=author.id%>/edit">Edit Author</a></li>
-
       </ul>
     </nav>
-
-    <main>
-      <section>
-        <h2>Author Attributes:</h2>
-        <ul>
-          <li>Name: <%= author.name %></li>
-        </ul>
-      </section>
-
-      <section>
-        <form action="/authors/<%=author.id%>?_method=DELETE">
-          <input type="submit" value="delete">
-        </form>
-      </section>
-
-    </main>
-
-  </body>
+  </header><!-- /header -->
+  <main>
+    <section>
+      <h2>Author Attributes:</h2>
+      <ul>
+        <li>Name: <%= author.name %></li>
+      </ul>
+    </section>
+    <section>
+      <h2>Author Articles:</h2>
+      <ul>
+        <%for (let i = 0; i < author.articles.length; i++) {%>
+          <li><a href="/articles/<%=author.articles[i].id%>"><%=author.articles[i].title%></a></li>
+       <% }%>
+      </ul>
+    </section>
+    <section>
+      <form action="/authors/<%=author.id%>?_method=DELETE" method="POST" >
+        <input type="submit" value="Delete Author">
+      </form>
+    </section>
+  </main>
+</body>
 </html>

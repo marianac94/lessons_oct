@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <header>
+    <h1>Authors</h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/dogs/new">Create a new Dog</a></li>
+      </ul>
+    </nav>
+  </header><!-- /header -->
+  <main>
+    <h2>List of Dogs</h2>
+    <ul>
+      <% for (let i = 0; i < dogs.length; i++){%>
+           <li><a href="/dogs/<%=dogs[i].id%>"><%=dogs[i].name %></a></li>
+      <%}%>
+    </ul>
+
+  </main>
+</body>
+</html>

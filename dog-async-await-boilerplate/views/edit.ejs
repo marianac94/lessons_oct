@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <header>
+    <h1>Edit <%=dog.name%></h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/dogs">Dogs Index</a></li>
+      </ul>
+    </nav>
+  </header><!-- /header -->
+  <main>
+    <h2>Author attributes</h2>
+    <form action="/dogs/<%=dog.id%>?_method=PUT" method="POST">
+      <input type="text" name="name" value="<%=dog.name%>"><br>
+      <button type="submit">Update Dog</button>
+    </form>
+  </main>
+</body>
+</html>

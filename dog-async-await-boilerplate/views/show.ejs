@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <header>
+    <h1>Show Page for <%=dog.name%></h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/dogs">Dogs</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>Dog Attributes</h2>
+      <ul>
+        <li>Name: <%=dog.name%></li>
+      </ul>
+    </section>
+
+    <section>
+      <a href="/dogs/<%=dog.id%>/edit">Edit</a>
+    </section>
+
+    <section>
+      <form action="/dogs/<%=dog.id%>?_method=DELETE" method="POST">
+        <button type="submit">Delete Dog</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
